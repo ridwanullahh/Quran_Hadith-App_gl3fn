@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'app_colors.dart';
@@ -123,16 +124,16 @@ class AppTheme {
       scaffoldBackgroundColor: const Color(0xFF000000),
       drawerTheme: const DrawerThemeData(backgroundColor: Color(0xFF000000)),
       bottomSheetTheme: const BottomSheetThemeData(backgroundColor: Color(0xFF000000)),
-      dialogTheme: const DialogTheme(backgroundColor: Color(0xFF0A0A0A)),
-      cardTheme: CardTheme(
+      dialogTheme: const DialogThemeData(backgroundColor: Color(0xFF0A0A0A)),
+      cardTheme: const CardThemeData(
         elevation: 0,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-          side: const BorderSide(color: Color(0xFF1A1A1A), width: 0.5),
+          borderRadius: BorderRadius.all(Radius.circular(16)),
+          side: BorderSide(color: Color(0xFF1A1A1A), width: 0.5),
         ),
-        color: const Color(0xFF0A0A0A),
+        color: Color(0xFF0A0A0A),
         surfaceTintColor: Colors.transparent,
-        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+        margin: EdgeInsets.symmetric(horizontal: 16, vertical: 6),
         clipBehavior: Clip.antiAlias,
       ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
@@ -195,7 +196,7 @@ class AppTheme {
       ),
 
       // ── Card ────────────────────────────────────────────────────
-      cardTheme: CardTheme(
+      cardTheme: CardThemeData(
         elevation: 0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
@@ -445,7 +446,7 @@ class AppTheme {
       ),
 
       // ── Dialog ──────────────────────────────────────────────────
-      dialogTheme: DialogTheme(
+      dialogTheme: DialogThemeData(
         backgroundColor: colorScheme.surface,
         elevation: 8,
         shape: RoundedRectangleBorder(
@@ -501,7 +502,7 @@ class AppTheme {
       ),
 
       // ── Tab Bar ─────────────────────────────────────────────────
-      tabBarTheme: TabBarTheme(
+      tabBarTheme: TabBarThemeData(
         labelColor: colorScheme.primary,
         unselectedLabelColor: isDark ? AppColors.darkTextTertiary : AppColors.lightTextTertiary,
         labelStyle: TextStyle(

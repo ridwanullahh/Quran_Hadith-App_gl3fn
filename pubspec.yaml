@@ -69,6 +69,9 @@ dependencies:
   # APK install intent (for in-app self-update)
   open_filex: ^4.5.0
 
+  # Pure-Dart gzip decode (offline gzipped corpora assets)
+  archive: ^4.0.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -81,13 +84,8 @@ flutter:
 
   assets:
     - assets/data/
-    - assets/data/hadith/
-    - assets/data/hadith/bukhari/
-    - assets/data/hadith/muslim/
-    - assets/data/hadith/abudawud/
-    - assets/data/hadith/nasai/
-    - assets/data/hadith/ibnmajah/
-    - assets/data/hadith/tirmidhi/
+    - assets/data/hadith/v2/
+    - assets/data/quran_science/
     - assets/fonts/
     - assets/images/
 

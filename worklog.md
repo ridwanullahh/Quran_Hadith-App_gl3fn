@@ -5,6 +5,38 @@ finishing each Task ID. Never overwrite prior entries.
 
 ---
 
+## 2026-11-25 — Session 2 (data corpora + data layer + toolchain lockstep)
+
+- Sandbox was recycled mid-session; repo and Flutter rebuilt from remote
+  (protocol push-verification proved its worth: baseline commit `011eca2`
+  was intact on GitHub).
+- Real offline corpora extracted and bundled (all counts verified):
+  - Hadith v2: 16 collections, 50,508 hadiths (Arabic + English), 601 books,
+    15,305 chapters, 25,260 scholars (npm `hadith` v1.3.0 SQLite dump).
+  - Nawawi 40 supplemented from fawazahmed0/hadith-api (source DB lacked it).
+  - Word-by-word sciences: all 114 surahs validated against /chapters
+    endpoint (sum 6236); word translation + transliteration + exact Madani
+    page/line per word; 604-page start table + per-surah page ranges
+    (quran.com API v4). wbw.json.gz = 0.94MB.
+  - Morphology: Quranic Arabic Corpus v0.4 — 77,429 words with root/lemma/
+    POS/features; 1,651 roots indexed for root exploration.
+  - Tajweed: letter-level annotations for all 6236 ayahs (quran/quran-tajweed).
+  - Tafseer: 6 editions (Ibn Kathir EN 3.96MB/AR 9.2MB, Muyassar AR,
+    Jalalayn EN/AR, Sa'di AR) — spa5k/tafsir_api; multi-format loader.
+- `lib/data/repositories/hadith_repository.dart` rewritten for v2 gzip
+  corpus: isolate decode, bounded LRU (2 collections), chapter enrichment,
+  scholars, diacritic-insensitive search; models extended (HadithChapter,
+  HadithScholar, isnad parts, narrator ids).
+- `lib/data/repositories/quran_science_repository.dart` added: single loader
+  for WBW + tajweed + morphology + root index + tafseer editions + page
+  metadata.
+- Old stub hadith assets deleted; pubspec updated (archive dep, v2 dirs);
+  app_constants updated (16 collections, v2 paths, ghost entries fixed).
+- Toolchain: local + CI now Flutter 3.50.1; analyze errors 28 → 0
+  (DialogTheme/CardTheme/TabBarTheme → *ThemeData, Cupertino import,
+  RepeatMode ambiguity).
+- docs/DATA_PROVENANCE.md documents every dataset source + schema.
+
 ## 2026-11-25 — Session 1 (setup, audit, protocol)
 
 - Cloned `ridwanullahh/Quran_Hadith-App` and pushed `main` to the dedicated

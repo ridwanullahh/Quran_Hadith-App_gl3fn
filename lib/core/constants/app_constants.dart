@@ -300,15 +300,25 @@ class AppConstants {
   static const String defaultTafseerSource = 'ibn_kathir';
 
   // ── Hadith Collections ───────────────────────────────────────────
-  static const int totalHadithCollections = 7;
+  // 16 fully offline collections (50,508 hadiths + 25,260 scholars).
+  static const int totalHadithCollections = 16;
   static const Map<String, String> hadithCollectionNames = {
     'bukhari': 'Sahih al-Bukhari',
     'muslim': 'Sahih Muslim',
-    'abudawud': 'Sunan Abi Dawud',
-    'tirmidhi': 'Jami at-Tirmidhi',
     'nasai': "Sunan an-Nasa'i",
+    'abudawud': 'Sunan Abi Dawud',
+    'tirmidhi': "Jami' at-Tirmidhi",
     'ibnmajah': 'Sunan Ibn Majah',
-    'malik': "Muwatta Malik",
+    'malik': 'Muwatta Malik',
+    'ahmad': 'Musnad Ahmad',
+    'nawawi40': "An-Nawawi's 40 Hadith",
+    'forty': 'Collections of Forty',
+    'riyad': 'Riyad as-Salihin',
+    'mishkat': 'Mishkat al-Masabih',
+    'adab': 'Al-Adab Al-Mufrad',
+    'shamail': 'Ash-Shama\u2019il Al-Muhammadiyah',
+    'bulugh': 'Bulugh al-Maram',
+    'hisn': 'Hisn al-Muslim',
   };
 
   // ── Database ─────────────────────────────────────────────────────
@@ -335,10 +345,12 @@ class AppConstants {
       'assets/data/quran_en_translation.json';
   static const String quranTranslationBasePath =
       'assets/data/translations/';
-  static const String tafseerBasePath = 'assets/data/tafseer/';
+  static const String tafseerBasePath = 'assets/data/quran_science/';
+  static const String quranScienceBasePath = 'assets/data/quran_science/';
   static const String wordAnalysisBasePath =
-      'assets/data/word_analysis/';
-  static const String hadithBasePath = 'assets/data/hadith/';
+      'assets/data/quran_science/';
+  static const String hadithBasePath = 'assets/data/hadith/v2/';
+  static const String hadithV2BasePath = 'assets/data/hadith/v2/';
 
   // ── Audio Base URLs ──────────────────────────────────────────────
   // Deprecated: use perAyahAudioBaseUrl + fullSurahAudioBaseUrl above.
