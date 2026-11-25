@@ -71,7 +71,7 @@ Bismillah Ar-Rahman Ar-Raheem. <full closing invocation>
 
 ---
 
-## 3. Working Discipline
+## 3. Working Discipline (STRICTER — BINDING ON ALL AGENTS)
 
 In addition to the invocation protocol, every agent MUST:
 
@@ -80,24 +80,58 @@ In addition to the invocation protocol, every agent MUST:
    requests it. Push changes to the same remote branch you cloned.
 2. **Commit and push after every sub-sub-task milestone** — never wait until
    all sub-tasks are done. Verify each push by commit hash, not by commit
-   title.
-3. **Run build/analyze before every commit** to ensure no regression is
-   introduced. A broken `main` branch is a critical failure.
+   title. A push is only "done" when the full SHA printed by `git rev-parse HEAD`
+   is confirmed to exist on the remote (`git ls-remote origin refs/heads/main`
+   must show the same SHA).
+3. **Run the build gate before EVERY commit**: `flutter analyze` with **0
+   errors** (warnings/infos allowed but must not grow per change), and
+   `flutter test` green. A broken `main` branch is a critical failure.
 4. **Battle-test before claiming done.** "Done" means: builds cleanly,
    analyzes with zero errors, runs without crashes on the happy path, and
-   satisfies the production-grade bar.
+   satisfies the production-grade bar. Visual verification of UI work is
+   mandatory (Flutter web + browser agent, or rendered pages) — never claim
+   UI is done without having seen it.
 5. **No dummies, mocks, prototypes, or simulations in production code.** Every
    feature must be fully functional and built like a production engineer wrote
-   it.
-6. **No emojis in UI/UX.** Use Material Icons or proper iconography only.
-   Follow the standards set in `docs/PRD.md` and `docs/TODO_TRACKER.md`.
+   it. **No fabricated religious data**: every Qur'an verse, hadith, narrator,
+   grading, tafseer, translation, and word-science entry must come from a real,
+   verifiable source dataset. The provenance of every bundled dataset (source
+   URL/edition) must be recorded in `docs/DATA_PROVENANCE.md`. If real data for
+   a feature cannot be sourced, build the pipeline and state plainly that data
+   is pending — never invent content.
+6. **No emojis in UI/UX, code, commit messages, or documentation.** Use
+   Material Icons or proper iconography only. Follow the standards set in
+   `docs/PRD.md` and `docs/TODO_TRACKER.md`.
 7. **Robust security guardrails.** Input validation, secure storage, no
-   hardcoded secrets in source, principle of least privilege, defense in
-   depth.
+   hardcoded secrets in source (tokens/keys live only in GitHub Secrets),
+   principle of least privilege, defense in depth, validated deep links,
+   sanitized user-generated content rendering.
 8. **Use absolute paths under `/home/z/my-project/`** for all scripts and
-   intermediate artifacts. Final deliverables go in `/home/z/my-project/download/`.
+   intermediate artifacts. Persist every script in `scripts/` (or the repo's
+   `scripts/` for repo tooling) before executing it. Final deliverables go in
+   `/home/z/my-project/download/`.
 9. **Read `worklog.md` before starting**; append to it after finishing each
-   Task ID. Never overwrite prior entries.
+   Task ID. Never overwrite prior entries. Update
+   `docs/IMPLEMENTATION_ROADMAP.md` checkboxes at each milestone so the todo
+   file always reflects reality.
+10. **Data contracts first.** Before changing any bundled dataset, document
+    its exact JSON schema in `docs/DATA_PROVENANCE.md` and keep the parser
+    tolerant (null-safe, dual-format) so old bookmarks (which persist
+    `collectionId_book_hadith` coordinates) never orphan.
+11. **APK budget discipline.** Feature additions that grow bundled data must
+    (a) use compression (gzip/dictionary encoding), (b) lazy-load per unit
+    (per collection/page), and (c) report the resulting APK delta in the
+    worklog entry. Release APK must stay below 80 MB while carrying all
+    offline corpora.
+12. **Toolchain lockstep.** Local Flutter version, CI Flutter version, AGP,
+    and Gradle must stay in lockstep. Never commit code that compiles only on
+    a toolchain version CI does not use.
+13. **Subagents.** Any delegated subagent must be given this protocol in its
+    prompt preamble, must commit nothing itself (reports only), and its output
+    must be verified by the primary agent before use.
+14. **Push cadence.** Never end a work session with unpushed commits. Never
+    use `--force` on `main` unless recovering from an unrecoverable broken
+    history, and then only with a note in `worklog.md`.
 
 ---
 
